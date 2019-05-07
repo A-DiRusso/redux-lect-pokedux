@@ -1,9 +1,11 @@
 import React from 'react';
 
-function PokeList({cards}) {
+function PokeList({cards, handleClick}) {
 
-    const cardItems = cards.map((card, i) => {
-        return <li key={i}>{card.name}</li>
+    const cardItems = cards.map((card) => {
+        return <li onClick={() => {
+            handleClick(card.id);
+        }} key={card.id}>{card.name}</li>
     });
     return (
         <ul>
