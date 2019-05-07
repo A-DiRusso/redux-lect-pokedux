@@ -3,11 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
 // STATE ========================================================
-import initialState from './base.json';
+import initialCards from './base.json';
 // console.log(initialState);
+const VISIBILITY_ALL = 'all';
+const VISIBILITY_CAUGHT = 'caught';
+const VISIBILITY_UNCAUGHT = 'uncaught';
+
+const initialState = {
+    ...initialCards,
+    visibilityFilter: VISIBILITY_ALL, 
+}
 
 // the state is an object
 // with cards property
@@ -28,17 +36,41 @@ function catchCard(id) {
 }
 window.catchCard = catchCard;
 
+const ACTION_VISIBILITY_ALL = VISIBILITY_ALL;
+const ACTION_VISIBILITY_CAUGHT = VISIBILITY_CAUGHT;
+const ACTION_VISIBILITY_UNCAUGHT = VISIBILITY_UNCAUGHT;
+
+function setVisiblityAll() {
+    return {
+        type: ACTION_VISIBILITY_ALL,
+    }
+}
+
+function setVisiblityCaught() {
+    return {
+        type: ACTION_VISIBILITY_CAUGHT,
+    }
+}
+
+function setVisiblityUncaught() {
+    return {
+        type: ACTION_VISIBILITY_UNCAUGHT
+    }
+}
+
+window.setVisiblityAll = setVisiblityAll;
+window.setVisiblityCaught = setVisiblityCaught;
+window.setVisiblityUncaught = setVisiblityUncaught;
+
 
 
 // REDUCER ========================================================
-function cards(state=initialState, action={type: '',}) {
+function cards(state=initialState.cards, action={type: '',}) {
     console.log(`cards got called with: ${action.payload}`);
     switch(action.type) {
         case ACTION_CATCH: 
             // find the card set it to 'caught'
-            const newState = {
-                ...state,
-                cards: state.cards.map(card => {
+            const newState = state.map(card => {
                     if (card.id === action.payload.id) {
                         return {
                             ...card,
@@ -47,19 +79,44 @@ function cards(state=initialState, action={type: '',}) {
                     } else {
                         return card;
                     }
-                }),
-            };
+                });            
             return newState;
         break;
-        defualt:
+        default:
             return state;
         break;
     }
 }
 
+function visibility(state=initialState.visibilityFilter, action={type: '',}) {
+    //switch function that will select caught cards?
+    //set the filter don't do the filter
+    switch(action.type) {
+        case ACTION_VISIBILITY_ALL:
+            //set the visiblity to all
+            return VISIBILITY_ALL;           
+        break;
+        case ACTION_VISIBILITY_CAUGHT:
+            // set the visiblity to caught
+            return VISIBILITY_CAUGHT
+        break;
+        case ACTION_VISIBILITY_UNCAUGHT:
+            // set the visibity to uncaught
+            return VISIBILITY_UNCAUGHT;
+        break;
+        default:
+            return state;
+        break;
+    }
+}
+
+const rootReducer = combineReducers({
+    cards: cards,
+    visibilityFilter: visibility,
+});
 
 // STORE ========================================================
-const store = createStore(cards);
+const store = createStore(rootReducer);
 window.store = store;
 
 
