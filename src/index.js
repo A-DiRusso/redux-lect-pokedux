@@ -36,7 +36,20 @@ function cards(state=initialState, action={type: '',}) {
     switch(action.type) {
         case ACTION_CATCH: 
             // find the card set it to 'caught'
-
+            const newState = {
+                ...state,
+                cards: state.cards.map(card => {
+                    if (card.id === action.payload.id) {
+                        return {
+                            ...card,
+                            isCaught: true,
+                        }
+                    } else {
+                        return card;
+                    }
+                }),
+            };
+            return newState;
         break;
         defualt:
             return state;
