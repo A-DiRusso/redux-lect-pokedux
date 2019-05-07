@@ -4,6 +4,49 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+// STATE ========================================================
+import initialState from './base.json';
+// console.log(initialState);
+
+// the state is an object
+// with cards property
+// which is an array of objects
+// { cards: [ {}, {}, {}, ]}
+
+// ACTION ========================================================
+// ACTIONS and ACTION creators
+const ACTION_CATCH = 'catch';
+
+function catchCard(id) {
+    return {
+        type: ACTION_CATCH,
+        payload: {
+            id,
+        }
+    };
+}
+
+
+
+// REDUCER ========================================================
+function cards(state=initialState, action={type: ''}) {
+    switch(action.type) {
+        case ACTION_CATCH: 
+            // find the card set it to 'caught'
+            
+        break;
+        defualt:
+            return state;
+        break;
+    }
+}
+
+
+// STORE ========================================================
+
+
+
+
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
