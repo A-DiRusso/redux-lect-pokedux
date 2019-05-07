@@ -2,8 +2,8 @@ import React from 'react';
 
 function PokeList({cards}) {
 
-    const cardItems = cards.map(card => {
-        return <li>{card.name}</li>
+    const cardItems = cards.map((card, i) => {
+        return <li key={i}>{card.name}</li>
     });
     return (
         <ul>

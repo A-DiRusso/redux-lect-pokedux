@@ -12,7 +12,7 @@ import PokeList from '../components/PokeList';
 
 
 // translating from redux state to react props
-const  = (state) => {
+const mapStateToProps = (state) => {
     //return our very own custom props Object
     return {
         // React goes on the left
