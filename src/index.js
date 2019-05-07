@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { createStore } from 'redux';
 
 // STATE ========================================================
 import initialState from './base.json';
@@ -25,15 +26,17 @@ function catchCard(id) {
         }
     };
 }
+window.catchCard = catchCard;
 
 
 
 // REDUCER ========================================================
-function cards(state=initialState, action={type: ''}) {
+function cards(state=initialState, action={type: '',}) {
+    console.log(`cards got called with: ${action.payload}`);
     switch(action.type) {
         case ACTION_CATCH: 
             // find the card set it to 'caught'
-            
+
         break;
         defualt:
             return state;
@@ -43,7 +46,8 @@ function cards(state=initialState, action={type: ''}) {
 
 
 // STORE ========================================================
-
+const store = createStore(cards);
+window.store = store;
 
 
 
