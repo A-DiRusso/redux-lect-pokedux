@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import VisibilityButton from '../components/VisibilityButton';
-import { setVisibilityUncaught } from '../actions-reducers';
+import { setVisiblityUncaught } from '../actions-reducers';
 
 const mapStateToProps = (state) => {
     // return a custom props object with props as key
@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         handleClick: () => {
-            dispatch(setVisibilityUncaught())
+            dispatch(setVisiblityUncaught())
         },
     };
 }
