@@ -14,8 +14,10 @@ function App() {
        <ButtonAll />
        <ButotnCaught />
        <ButtonUncaught />
-       <PokeList />
       </header>
+      <div classname="cards">
+       <PokeList />
+       </div>
     </div>
   );
 }

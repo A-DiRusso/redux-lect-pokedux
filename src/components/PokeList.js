@@ -19,7 +19,7 @@ function PokeList({cards, visibilityFilter, handleClick}) {
     const cardItems = filteredCards.map((card) => {
         return <li onClick={() => {
             handleClick(card.id);
-        }} key={card.id}>{card.name}</li>
+        }} key={card.id}><img className="pokeImg" src={card.imageUrl} alt="poke"/><br/>{card.name}</li>
     });
     return (
         <ul>
